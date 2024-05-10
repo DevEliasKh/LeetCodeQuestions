@@ -1,3 +1,5 @@
+// https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/646/
+
 var rotate = function (nums, k) {
    let temp = nums.length > k ? k : k % nums.length;
    let del = nums.splice(0, nums.length - temp);

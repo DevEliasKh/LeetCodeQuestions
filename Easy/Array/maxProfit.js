@@ -1,3 +1,5 @@
+// https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/564/
+
 var maxProfit = function (prices) {
    let stock = false;
    let bPrice = 0;

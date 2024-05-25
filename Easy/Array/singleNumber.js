@@ -1,27 +1,24 @@
 // https://leetcode.com/explore/featured/card/top-interview-questions-easy/92/array/549/
+//* Thanks to Chase
 
-// TODO not solved yet!
-
-var singleNumber = function (nums) {
-   nums.sort((a, b) => a - b);
-   let newNums = deleteDuplicatedNum(nums, 0);
-   return newNums[0];
-};
-
-function deleteDuplicatedNum(nums, i) {
-   let newNums = [];
-   if (nums.length > 1) {
-      if (nums[i] == nums[i + 1]) {
-         newNums = nums.filter((index) => index != nums[i]);
-         console.log(i, newNums);
-         deleteDuplicatedNum(newNums, i);
+function singleNumber(nums) {
+   const set = new Set();
+   for (const num of nums) {
+      if (set.has(num)) {
+         set.delete(num);
       } else {
-         return (newNums = [nums[0]]);
+         set.add(num);
       }
-   } else {
-      console.log(nums[0]);
-      return (newNums = [nums[0]]);
    }
-   console.log("newnums is ", newNums);
-   return newNums;
+   return [...set][0];
+}
+
+function singleNumber(nums) {
+   const map = new Map();
+   for (const num of nums) {
+      map.set(num, (map.get(num) ?? 0) + 1);
+   }
+   for (const [num, count] of map) {
+      if (count === 1) return num;
+   }
 }

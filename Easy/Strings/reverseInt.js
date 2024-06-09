@@ -6,12 +6,24 @@
  * @param {number} x
  * @return {number}
  */
-https: var reverse = function (x) {
-   const max = Math.pow(2, 23) - 1;
-   const min = Math.pow(-2, 23);
+var reverse = function (x) {
+   let result = 0
+   const max = Math.pow(2, 31) - 1;
+   const min = Math.pow(-2, 31);
    if (x > max || x < min) {
       return 0;
    } else {
-      return x.toString().split("").reverse().join("");
+       if(x > 0 ){
+      result =  x.toString().split("").reverse().join("");
+       } else {
+           x = x*-1
+                 result = -(x.toString().split("").reverse().join(""));
+       }
    }
+    
+    if (result > max || result < min) {
+        return 0
+    } else {
+        return result
+    }
 };

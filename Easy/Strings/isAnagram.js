@@ -6,7 +6,7 @@
  * @return {boolean}
  */
 var isAnagram = function(s, t) {
-    let result = null
+    let result = true
     const sortedS = s.split('').sort()
     const sortedT = t.split('').sort()
     if (sortedS.length != sortedT.length){

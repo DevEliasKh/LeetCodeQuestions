@@ -7,30 +7,12 @@
  * @return {number}
  */
 
-const s = "   -042";
+const s = "   -14v2";
 
 function myAtoi(s) {
    const newS = s.trim();
-   let resultString = "";
-   let isDigit = true;
-   while (isDigit) {
-      for (let i = 0; i < newS.length; i++) {
-         if (resultString.length == 0) {
-         } else {
-         }
-         if (checkDigit(newS[i])) {
-            resultString = resultString + newS[i];
-         } else {
-            isDigit = false;
-         }
-      }
-      return +resultString;
-   }
-}
-
-function checkDigit(s) {
-   console.log(s);
-   let acceptableChar = [
+   let acceptableChar = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+   let firstAcceptableChar = [
       "0",
       "1",
       "2",
@@ -44,17 +26,35 @@ function checkDigit(s) {
       "-",
       "+",
    ];
-   if (acceptableChar.indexOf(s) != -1) {
+
+   let resultString = "";
+   let isDigit = true;
+   while (isDigit) {
+      for (let i = 0; i < newS.length; i++) {
+         if (resultString.length == 0) {
+            if (checkDigit(newS[i], firstAcceptableChar)) {
+               resultString = resultString + newS[i];
+            } else {
+               return (isDigit = false);
+            }
+         } else {
+            if (checkDigit(newS[i], acceptableChar)) {
+               resultString = resultString + newS[i];
+            } else {
+               return (isDigit = false);
+            }
+         }
+      }
+      return resultString;
+   }
+   return +resultString;
+}
+
+function checkDigit(s, arr) {
+   if (arr.indexOf(s) != -1) {
       return true;
    }
    return false;
-}
-
-function checkFirstChar(s) {
-   let acceptableChar = ["-", "+"];
-   if (acceptableChar.indexOf(s) != -1) {
-      return true;
-   }
 }
 
 console.log(myAtoi(s));

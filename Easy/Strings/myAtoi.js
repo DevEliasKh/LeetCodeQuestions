@@ -1,15 +1,11 @@
 // https://leetcode.com/explore/interview/card/top-interview-questions-easy/127/strings/884/
 
-// TODO: solve it!
-
 /**
  * @param {string} s
  * @return {number}
  */
 
-const s = "   -14v2";
-
-function myAtoi(s) {
+var myAtoi = function (s) {
    const newS = s.trim();
    let acceptableChar = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
    let firstAcceptableChar = [
@@ -26,29 +22,35 @@ function myAtoi(s) {
       "-",
       "+",
    ];
-
    let resultString = "";
-   let isDigit = true;
-   while (isDigit) {
-      for (let i = 0; i < newS.length; i++) {
-         if (resultString.length == 0) {
-            if (checkDigit(newS[i], firstAcceptableChar)) {
-               resultString = resultString + newS[i];
-            } else {
-               return (isDigit = false);
-            }
+   const INT_MAX = 2147483647;
+   const INT_MIN = -2147483648;
+
+   for (let i = 0; i < newS.length; i++) {
+      if (resultString.length == 0) {
+         if (checkDigit(newS[i], firstAcceptableChar)) {
+            resultString = resultString + newS[i];
          } else {
-            if (checkDigit(newS[i], acceptableChar)) {
-               resultString = resultString + newS[i];
-            } else {
-               return (isDigit = false);
-            }
+            break;
+         }
+      } else {
+         if (checkDigit(newS[i], acceptableChar)) {
+            resultString = resultString + newS[i];
+         } else {
+            break;
          }
       }
-      return resultString;
    }
-   return +resultString;
-}
+   if (resultString < INT_MIN) {
+      return INT_MIN;
+   } else if (resultString > INT_MAX) {
+      return INT_MAX;
+   } else if (Number(resultString) != Number(resultString)) {
+      return 0;
+   } else {
+      return Number(resultString);
+   }
+};
 
 function checkDigit(s, arr) {
    if (arr.indexOf(s) != -1) {
@@ -56,5 +58,3 @@ function checkDigit(s, arr) {
    }
    return false;
 }
-
-console.log(myAtoi(s));
